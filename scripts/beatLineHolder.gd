@@ -7,6 +7,7 @@ extends VBoxContainer
 
 @export var songPath : String = ""
 @export var secondsOfSong : float = 10
+@export var delaySeconds : float = 0.1
 
 var beatLinePath : String  = "res://scenes/beat_timer_line.tscn"
 
@@ -23,7 +24,7 @@ func _ready():
 		return
 	
 	addNewLine()
-	%AudioStreamPlayer.stream = load(songPath).instantiate()
+	%AudioStreamPlayer.stream = load(songPath)
 	
 
 func _process(delta):
@@ -39,7 +40,9 @@ func _on_play_button_pressed():
 	
 	if playing:
 		stop()
+		return
 	
+	start()
 	
 
 func addNewLine():
@@ -54,13 +57,14 @@ func addNewLine():
 	
 
 func stop():
-	currentBeatLine.cancel()
+	if currentBeatLine:
+		currentBeatLine.cancel()
 	%AudioStreamPlayer.stop()
 	playing = false
 	%playButton.text = "Play"
 
 func start():
-	currentBeatLine.start(%AudioStreamPlayer)
+	currentBeatLine.start(%AudioStreamPlayer,delaySeconds)
 	playing = true
 	%playButton.text = "Cancel"
 	

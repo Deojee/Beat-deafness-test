@@ -42,7 +42,7 @@ func _physics_process(delta):
 	
 	pass
 
-func start(player):
+func start(player : AudioStreamPlayer,delaySeconds : float):
 	
 	
 	for child in %beatLines.get_children():
@@ -53,7 +53,7 @@ func start(player):
 	visible = true
 	holder.visible = true
 	
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(delaySeconds).timeout
 	
 	running = true
 	startTime = Time.get_ticks_msec()
@@ -102,10 +102,10 @@ func updateLabel():
 	for beat in beats:
 		var difference = getClosestDistance(beat,previousBeats)
 		averageDifference += difference
-		totalDifference += difference
+		totalDifference += abs(difference)
 	averageDifference /= float(beats.size())
 	
-	labelText += " Average difference (MS) " + str(averageDifference)
+	labelText += " Average difference (MS) " + str(int(averageDifference))
 	labelText += " Total difference (MS) " + str(totalDifference)
 	
 	%Label.text = labelText

@@ -39,32 +39,28 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "Beat Deafness Test"
+
+[node name="subtitle" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Hit space in time with the beat."
 
 [node name="beatLineHolder" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jj1vp")]
 layout_mode = 2
 songName = "Oh No"
 artist = "Mariana"
 songPath = "res://songs/MARINA - Oh No! (I Feel Like I'm The Worst So I Always Act like I'm The Best) [Official Music Video].mp3"
-secondsOfSong = 10.0
+secondsOfSong = 20.0
+delaySeconds = 0.0
 
 [node name="beatLineHolder2" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jj1vp")]
 layout_mode = 2
-songName = "Dog"
-artist = "Bloody Koalas"
+songName = "Killing In the Name"
+artist = "Rage aginst the Machine"
+songPath = "res://songs/Rage Against The Machine - Killing In the Name (Official HD Video).mp3"
 secondsOfSong = 10.0
-
-[node name="beatLineHolder3" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jj1vp")]
-layout_mode = 2
-songName = "Rat"
-artist = "gay rats"
-secondsOfSong = 10.0
-
-[node name="beatLineHolder4" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jj1vp")]
-layout_mode = 2
-songName = "Elephant"
-artist = "Hiya"
-secondsOfSong = 10.0
+delaySeconds = 0.1
