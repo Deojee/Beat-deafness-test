@@ -4,8 +4,13 @@ class_name beatTimerLine
 
 @export var lengthInSeconds = 60 * 3 + 45
 
+
+
 #beats is an array of the number of miliseconds in that the beat is.
 var beats : Array = []
+
+#associates times with the boxes there.
+var boxes : Dictionary = {}
 
 var control : beatTimerLine = null
 var holder
@@ -37,6 +42,7 @@ func _physics_process(delta):
 		newMarker.color = Color.BLUE
 		
 		beats.append(currentPosition)
+		boxes[currentPosition] = newMarker
 		
 		pass
 	
@@ -173,19 +179,19 @@ func getClosestDistance(num,sortedList):
 		
 		if abs(difference) > abs(smallestDifference):
 			
-			var newMarker = Label.new()
-			%labelLines.add_child(newMarker)
-			newMarker.position.x = (num/1000.0)/float(lengthInSeconds) * 1800 - 1.0
-			newMarker.text = str(int(smallestDifference))# + "\n" + str(num," ",newNum)
+			#var newMarker = Label.new()
+			#%labelLines.add_child(newMarker)
+			#newMarker.position.x = (num/1000.0)/float(lengthInSeconds) * 1800 - 1.0
+			#newMarker.text = str(int(smallestDifference))# + "\n" + str(num," ",newNum)
 			
 			return smallestDifference
 		
 		smallestDifference = difference
 		
 	
-	var newMarker = Label.new()
-	%labelLines.add_child(newMarker)
-	newMarker.position.x = (num/1000.0)/float(lengthInSeconds) * 1800 - 1.0
-	newMarker.text = str(int(smallestDifference))# + "\n" + str(num," ",newNum)
+	#var newMarker = Label.new()
+	#%labelLines.add_child(newMarker)
+	#newMarker.position.x = (num/1000.0)/float(lengthInSeconds) * 1800 - 1.0
+	#newMarker.text = str(int(smallestDifference))# + "\n" + str(num," ",newNum)
 	
 	return smallestDifference
