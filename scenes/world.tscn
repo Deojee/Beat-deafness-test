@@ -1,11 +1,39 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5o3ph6322ttg"]
+[gd_scene load_steps=10 format=3 uid="uid://c5o3ph6322ttg"]
 
 [ext_resource type="Script" path="res://scenes/showPrevAttempt.gd" id="1_hs46h"]
 [ext_resource type="PackedScene" uid="uid://cbb2r4h5s16ug" path="res://scenes/beat_line_holder.tscn" id="1_jj1vp"]
 [ext_resource type="Script" path="res://scenes/BeatReact.gd" id="1_uihgy"]
 [ext_resource type="Script" path="res://scripts/beatButton.gd" id="2_kn7kv"]
+[ext_resource type="Script" path="res://scenes/volume.gd" id="3_duamg"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_rdkm1"]
+
+[sub_resource type="Animation" id="Animation_astn1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/CenterContainer/BeatReact/MeshInstance2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect/CenterContainer/BeatReact/MeshInstance2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_p03jn"]
 resource_name = "react"
@@ -34,33 +62,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_astn1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect/CenterContainer/BeatReact/MeshInstance2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1e-05, 1e-05)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect/CenterContainer/BeatReact/MeshInstance2D:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jqyhs"]
@@ -139,7 +140,10 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Hit space in time with the beat."
 
-[node name="showPrevAttempt" type="CheckButton" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="showPrevAttempt" type="CheckButton" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 focus_mode = 0
@@ -147,12 +151,25 @@ theme_override_font_sizes/font_size = 30
 text = "Show Attempt"
 script = ExtResource("1_hs46h")
 
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Volume:"
+
+[node name="volume" type="HSlider" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+script = ExtResource("3_duamg")
+
 [node name="beatLineHolder" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jj1vp")]
 layout_mode = 2
 songName = "Oh No"
 artist = "Mariana"
 songPath = "res://songs/MARINA - Oh No! (I Feel Like I'm The Worst So I Always Act like I'm The Best) [Official Music Video].mp3"
-secondsOfSong = 15.0
+secondsOfSong = 5.0
 delaySeconds = -2.0
 bpm = 127.0
 bpmDelaySeconds = 0.5
@@ -162,6 +179,8 @@ layout_mode = 2
 songName = "Killing In the Name"
 artist = "Rage aginst the Machine"
 songPath = "res://songs/Rage Against The Machine - Killing In the Name (Official HD Video).mp3"
+secondsOfSong = 20.0
+bpm = 89.0
 
 [node name="beatButton" type="Button" parent="."]
 layout_mode = 1
@@ -179,5 +198,7 @@ keep_pressed_outside = true
 text = "Beat"
 script = ExtResource("2_kn7kv")
 
-[connection signal="toggled" from="MarginContainer/ScrollContainer/VBoxContainer/showPrevAttempt" to="MarginContainer/ScrollContainer/VBoxContainer/showPrevAttempt" method="_on_toggled"]
+[connection signal="toggled" from="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/showPrevAttempt" to="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/showPrevAttempt" method="_on_toggled"]
+[connection signal="drag_ended" from="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/volume" to="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/volume" method="_on_drag_ended"]
+[connection signal="value_changed" from="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/volume" to="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/volume" method="_on_value_changed"]
 [connection signal="pressed" from="beatButton" to="beatButton" method="_on_pressed"]

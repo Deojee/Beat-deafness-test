@@ -44,14 +44,16 @@ func _physics_process(delta):
 		beats.append(currentPosition)
 		boxes[currentPosition] = newMarker
 		
+		updateLabel()
 		pass
 	
 	
 	pass
 
+var milisecondsPerBeat
 func setControlBeats(bpm,bpmDelaySeconds):
 	
-	var milisecondsPerBeat = 60000/bpm
+	milisecondsPerBeat = 60000/bpm
 	var newBeats = [bpmDelaySeconds * 1000]
 	while newBeats.back() < lengthInSeconds * 1000.0:
 		newBeats.append(newBeats.back() + milisecondsPerBeat)
@@ -74,9 +76,15 @@ func setControlBeats(bpm,bpmDelaySeconds):
 
 func start(player : AudioStreamPlayer,delaySeconds : float):
 	
+	Globals.justPressed = false
 	
 	for child in %beatLines.get_children():
 		child.queue_free()
+	for child in %labelLines.get_children():
+		child.queue_free()
+	
+	boxes.clear()
+	beats.clear()
 	
 	for line in get_tree().get_nodes_in_group("beatLines"):
 		line.visible = false
@@ -120,6 +128,22 @@ func updateLabel():
 	
 	var controlBeats = control.beats
 	
+	for child in %controlBeatLines.get_children():
+		child.queue_free()
+	for child in %labelLines.get_children():
+		child.queue_free()
+	for beat in controlBeats:
+		
+		Globals.justPressed = false
+		var newMarker = ColorRect.new()
+		%controlBeatLines.add_child(newMarker)
+		newMarker.position.x = (beat/1000.0)/float(lengthInSeconds) * 1800 - 1.0
+		newMarker.position.y = -10
+		newMarker.size = Vector2(4,20)
+		newMarker.color = Color.BLUE
+		
+	
+	
 	var labelText = ""
 	
 	var numberOfBeatsDifference : int = controlBeats.size() - beats.size()
@@ -146,6 +170,7 @@ func updateLabel():
 		var difference = getClosestDistance(beat,controlBeats)
 		averageDifference += difference
 		totalDifference += abs(difference)
+		absoluteAverageDifference += abs(difference)
 		
 		if difference >= 0:
 			positiveDifferenceCount += 1
@@ -154,18 +179,86 @@ func updateLabel():
 			negativeDistanceCount += 1
 			averageNegativeDifference += difference
 		
+		var maxErrorMiliseconds = control.milisecondsPerBeat/2.0
+		var wrongNess = float(difference)/float(maxErrorMiliseconds)
+		boxes[beat].color = Color.GREEN.lerp(Color.RED,wrongNess)
+		
 	
 	averageDifference /= float(beats.size())
-	averageNegativeDifference /= negativeDistanceCount
-	averagePositiveDifference /= positiveDifferenceCount
+	averageNegativeDifference /= negativeDistanceCount if negativeDistanceCount != 0 else 1
+	averagePositiveDifference /= positiveDifferenceCount if negativeDistanceCount != 0 else 1
+	absoluteAverageDifference /= float(beats.size())
 	
 	labelText += " Average difference (MS) " + str(int(averageDifference)) 
+	labelText += " ABS: " + str(int(absoluteAverageDifference))
 	labelText += " POS: " + str(int(averagePositiveDifference)) +  " * " + str(int(positiveDifferenceCount))
 	labelText += " NEG: " + str(int(averageNegativeDifference)) +  " * " + str(int(negativeDistanceCount))
 	
-	labelText += " | Total difference (MS) " + str(totalDifference)
+	labelText += " | Total difference (MS) " + str(int(totalDifference))
+	
+	%RawLabel.text = labelText
+	
+	#after this we redo the math for the adjusted numbers
+	var adjustedBeats = []
+	for beat in beats:
+		adjustedBeats.append( beat - int(averageDifference))
+	
+	
+	for beat in controlBeats:
+		
+		Globals.justPressed = false
+		var newMarker = ColorRect.new()
+		%controlBeatLines.add_child(newMarker)
+		newMarker.position.x = ((beat + int(averageDifference)) /1000.0)/float(lengthInSeconds) * 1800 - 1.0
+		newMarker.position.y = -10
+		newMarker.size = Vector2(4,20)
+		newMarker.color = Color.AQUA
+		
+	
+	labelText = ""
+	
+	absoluteAverageDifference = 0
+	
+	averagePositiveDifference = 0
+	positiveDifferenceCount = 0
+	
+	averageNegativeDifference = 0
+	negativeDistanceCount = 0
+	
+	totalDifference = 0
+	
+	for beat in adjustedBeats:
+		var difference = getClosestDistance(beat,controlBeats)
+		
+		totalDifference += abs(difference)
+		absoluteAverageDifference += abs(difference)
+		
+		if difference >= 0:
+			positiveDifferenceCount += 1
+			averagePositiveDifference += difference
+		else:
+			negativeDistanceCount += 1
+			averageNegativeDifference += difference
+		
+		var maxErrorMiliseconds = control.milisecondsPerBeat/2.0
+		var wrongNess = float(difference)/float(maxErrorMiliseconds)
+		boxes[beat + int(averageDifference)].color = Color.GREEN.lerp(Color.RED,wrongNess)
+		
+	
+	
+	averageNegativeDifference /= negativeDistanceCount if negativeDistanceCount != 0 else 1
+	averagePositiveDifference /= positiveDifferenceCount if negativeDistanceCount != 0 else 1
+	absoluteAverageDifference /= float(beats.size())
+	
+	labelText += " Absolute Average " + str(int(absoluteAverageDifference)) 
+	labelText += " POS: " + str(int(averagePositiveDifference)) +  " * " + str(int(positiveDifferenceCount))
+	labelText += " NEG: " + str(int(averageNegativeDifference)) +  " * " + str(int(negativeDistanceCount))
+	
+	labelText += " | Total difference (MS) " + str(int(totalDifference))
 	
 	%Label.text = labelText
+	
+	
 	
 
 #assumes sorted list is from least to greatest, and not empty
@@ -184,7 +277,7 @@ func getClosestDistance(num,sortedList):
 			#newMarker.position.x = (num/1000.0)/float(lengthInSeconds) * 1800 - 1.0
 			#newMarker.text = str(int(smallestDifference))# + "\n" + str(num," ",newNum)
 			
-			return smallestDifference
+			break
 		
 		smallestDifference = difference
 		
@@ -193,5 +286,7 @@ func getClosestDistance(num,sortedList):
 	#%labelLines.add_child(newMarker)
 	#newMarker.position.x = (num/1000.0)/float(lengthInSeconds) * 1800 - 1.0
 	#newMarker.text = str(int(smallestDifference))# + "\n" + str(num," ",newNum)
+	
+	
 	
 	return smallestDifference

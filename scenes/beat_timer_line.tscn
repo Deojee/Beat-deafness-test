@@ -8,16 +8,16 @@ Label/constants/outline_size = 2
 Label/font_sizes/font_size = 16
 
 [node name="beatLine" type="Control" groups=["beatLines"]]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 269.0
 script = ExtResource("1_v4qah")
 lengthInSeconds = 10
 
 [node name="beat timer line" type="Node2D" parent="."]
-position = Vector2(0, 55)
+position = Vector2(0, 105)
 
 [node name="background" type="ColorRect" parent="beat timer line"]
 offset_right = 1800.0
@@ -25,12 +25,15 @@ offset_bottom = 40.0
 
 [node name="marker" type="ColorRect" parent="beat timer line"]
 unique_name_in_owner = true
-offset_top = -62.0
+offset_top = 3.0
 offset_right = 4.0
 offset_bottom = 40.0
 color = Color(0, 0, 0, 1)
 
 [node name="beatLines" type="Node2D" parent="beat timer line"]
+unique_name_in_owner = true
+
+[node name="controlBeatLines" type="Node2D" parent="beat timer line"]
 unique_name_in_owner = true
 
 [node name="labelLines" type="Control" parent="beat timer line"]
@@ -42,10 +45,44 @@ offset_right = 40.0
 offset_bottom = 40.0
 theme = SubResource("Theme_do3ye")
 
+[node name="RawLabel" type="Label" parent="beat timer line"]
+unique_name_in_owner = true
+offset_left = 1.0
+offset_top = -51.0
+offset_right = 1800.0
+offset_bottom = -1.0
+theme_override_font_sizes/font_size = 30
+text = "
+"
+
 [node name="Label" type="Label" parent="beat timer line"]
 unique_name_in_owner = true
-offset_top = -50.0
-offset_right = 1799.0
+offset_left = 1.0
+offset_top = -104.0
+offset_right = 1800.0
+offset_bottom = -54.0
 theme_override_font_sizes/font_size = 30
 text = "Unplayed
 "
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 156.0
+offset_right = 298.0
+offset_bottom = 259.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2

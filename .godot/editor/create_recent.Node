@@ -1,3 +1,9 @@
+MarginContainer
+VBoxContainer
+Panel
+Label
+HSlider
+HBoxContainer
 AnimationPlayer
 Control
 CenterContainer
@@ -6,10 +12,4 @@ CheckButton
 Button
 VSeparator
 ColorRect
-VBoxContainer
 AudioStreamPlayer
-Label
-CanvasModulate
-Node2D
-MarginContainer
-HBoxContainer
