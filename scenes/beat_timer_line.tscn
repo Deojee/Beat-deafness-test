@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bgcgueon0iw1j"]
 
-[ext_resource type="Script" path="res://beat timer line.gd" id="1_hlq4s"]
+[ext_resource type="Script" path="res://scripts/beat timer line.gd" id="1_v4qah"]
 
 [node name="beatLine" type="Control" groups=["beatLines"]]
 custom_minimum_size = Vector2(0, 100)
@@ -8,7 +8,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_hlq4s")
+script = ExtResource("1_v4qah")
 lengthInSeconds = 10
 
 [node name="beat timer line" type="Node2D" parent="."]

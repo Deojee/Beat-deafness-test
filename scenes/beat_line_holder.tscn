@@ -1,9 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://cbb2r4h5s16ug"]
 
-[ext_resource type="Script" path="res://beatLineHolder.gd" id="1_4to5t"]
-[ext_resource type="PackedScene" uid="uid://bgcgueon0iw1j" path="res://scenes/beat_timer_line.tscn" id="2_c6hjw"]
+[ext_resource type="Script" path="res://scripts/beatLineHolder.gd" id="1_4to5t"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6eoi6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ms2bs"]
 
 [node name="beatLineHolder" type="VBoxContainer" groups=["beatLines"]]
 anchors_preset = 15
@@ -12,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4to5t")
+secondsOfSong = null
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -19,11 +21,18 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="songName" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="songName" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
-text = "Song name"
+
+[node name="artist" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -31,32 +40,23 @@ theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxEmpty_6eoi6")
 
 [node name="playButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 60
 text = "Play"
 
-[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-theme_override_styles/separator = SubResource("StyleBoxEmpty_6eoi6")
-
-[node name="cancelButton" type="Button" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-focus_mode = 0
-theme_override_font_sizes/font_size = 60
-text = "Cancel
-"
-
 [node name="beatLines" type="VBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="beatLine" parent="VBoxContainer/beatLines" instance=ExtResource("2_c6hjw")]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+theme_override_constants/separation = 40
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ms2bs")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/playButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/cancelButton" to="." method="_on_cancel_button_pressed"]

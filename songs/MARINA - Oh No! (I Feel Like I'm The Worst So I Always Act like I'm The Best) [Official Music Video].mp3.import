@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://lrehcamlvon4"
+path="res://.godot/imported/MARINA - Oh No! (I Feel Like I'm The Worst So I Always Act like I'm The Best) [Official Music Video].mp3-583e37aa3b3763dc49058fa28d8e13ae.mp3str"
+
+[deps]
+
+source_file="res://songs/MARINA - Oh No! (I Feel Like I'm The Worst So I Always Act like I'm The Best) [Official Music Video].mp3"
+dest_files=["res://.godot/imported/MARINA - Oh No! (I Feel Like I'm The Worst So I Always Act like I'm The Best) [Official Music Video].mp3-583e37aa3b3763dc49058fa28d8e13ae.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
