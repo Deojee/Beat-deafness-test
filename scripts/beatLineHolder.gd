@@ -62,11 +62,14 @@ func stop():
 	%AudioStreamPlayer.stop()
 	playing = false
 	%playButton.text = "Play"
+	
+	Globals.beatButtonVisible = false
+	
 
 func start():
 	currentBeatLine.start(%AudioStreamPlayer,delaySeconds)
 	playing = true
 	%playButton.text = "Cancel"
 	
-	
+	Globals.beatButtonVisible = true
 	

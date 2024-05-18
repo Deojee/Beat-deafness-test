@@ -1,3 +1,4 @@
+Button
 VSeparator
 ColorRect
 VBoxContainer
@@ -7,6 +8,5 @@ CanvasModulate
 Node2D
 MarginContainer
 HBoxContainer
-Button
 Control
 ScrollContainer

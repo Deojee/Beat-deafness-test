@@ -27,8 +27,8 @@ func _physics_process(delta):
 		end()
 		return
 	
-	if Input.is_action_just_pressed("space"):
-		
+	if Input.is_action_just_pressed("space") or Globals.justPressed:
+		Globals.justPressed = false
 		var newMarker = ColorRect.new()
 		%beatLines.add_child(newMarker)
 		newMarker.position.x = percentageOfSong * furthestPosition - 1.0

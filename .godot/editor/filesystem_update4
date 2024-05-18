@@ -8,3 +8,7 @@ res://scenes/beat_timer_line.tscn
 res://scenes/beat_line_holder.tscn
 res://scripts/beatLineHolder.gd
 res://scripts/beat timer line.gd
+res://scenes/beatButton.gd
+res://scripts/beatButton.gd
+res://scripts/Globals.gd
+res://scripts/Saves.gd
