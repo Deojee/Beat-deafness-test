@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5o3ph6322ttg"]
 
-[ext_resource type="PackedScene" uid="uid://cbb2r4h5s16ug" path="res://beat_line_holder.tscn" id="1_jj1vp"]
+[ext_resource type="PackedScene" uid="uid://cbb2r4h5s16ug" path="res://scenes/beat_line_holder.tscn" id="1_jj1vp"]
 
 [node name="World" type="Control"]
 layout_mode = 3

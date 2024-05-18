@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cbb2r4h5s16ug"]
 
 [ext_resource type="Script" path="res://beatLineHolder.gd" id="1_4to5t"]
-[ext_resource type="PackedScene" uid="uid://bgcgueon0iw1j" path="res://beat_timer_line.tscn" id="2_c6hjw"]
+[ext_resource type="PackedScene" uid="uid://bgcgueon0iw1j" path="res://scenes/beat_timer_line.tscn" id="2_c6hjw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6eoi6"]
 
