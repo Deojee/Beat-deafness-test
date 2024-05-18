@@ -7,7 +7,7 @@ class_name beatTimerLine
 #beats is an array of the number of miliseconds in that the beat is.
 var beats : Array = []
 
-var previous : beatTimerLine = null
+var control : beatTimerLine = null
 var holder
 
 var running = false
@@ -42,6 +42,29 @@ func _physics_process(delta):
 	
 	pass
 
+func setControlBeats(bpm,bpmDelaySeconds):
+	
+	var milisecondsPerBeat = 60000/bpm
+	var newBeats = [bpmDelaySeconds * 1000]
+	while newBeats.back() < lengthInSeconds * 1000.0:
+		newBeats.append(newBeats.back() + milisecondsPerBeat)
+	
+	for beat in newBeats:
+		
+		Globals.justPressed = false
+		var newMarker = ColorRect.new()
+		%beatLines.add_child(newMarker)
+		newMarker.position.x = (beat/1000.0)/float(lengthInSeconds) * 1800 - 1.0
+		newMarker.size = Vector2(4,40)
+		newMarker.color = Color.BLUE
+		
+		beats.append(beat)
+		
+		
+	
+	%Label.text = "Control"
+	
+
 func start(player : AudioStreamPlayer,delaySeconds : float):
 	
 	
@@ -50,11 +73,12 @@ func start(player : AudioStreamPlayer,delaySeconds : float):
 	
 	for line in get_tree().get_nodes_in_group("beatLines"):
 		line.visible = false
-	visible = true
-	holder.visible = true
 	
-	if Globals.showPreviousAttempt and previous:
-		previous.visible = true
+	
+	holder.visible = true
+	if Globals.showAttempt and control:
+		control.visible = true
+		visible = true
 	
 	
 	await get_tree().create_timer(delaySeconds).timeout
@@ -83,15 +107,15 @@ func end():
 
 func updateLabel():
 	
-	if previous == null or previous.beats.size() == 0:
-		%Label.text = "No previous attempt"
+	if control == null or control.beats.size() == 0:
+		%Label.text = "Control"
 		return
 	
-	var previousBeats = previous.beats
+	var controlBeats = control.beats
 	
 	var labelText = ""
 	
-	var numberOfBeatsDifference : int = previous.beats.size() - beats.size()
+	var numberOfBeatsDifference : int = controlBeats.size() - beats.size()
 	
 	if numberOfBeatsDifference == 0:
 		labelText += "Same number of beats.  | "
@@ -112,7 +136,7 @@ func updateLabel():
 	var totalDifference : float = 0
 	
 	for beat in beats:
-		var difference = getClosestDistance(beat,previousBeats)
+		var difference = getClosestDistance(beat,controlBeats)
 		averageDifference += difference
 		totalDifference += abs(difference)
 		

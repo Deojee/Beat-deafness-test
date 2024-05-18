@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5o3ph6322ttg"]
+[gd_scene load_steps=5 format=3 uid="uid://c5o3ph6322ttg"]
 
 [ext_resource type="Script" path="res://scenes/showPrevAttempt.gd" id="1_hs46h"]
 [ext_resource type="PackedScene" uid="uid://cbb2r4h5s16ug" path="res://scenes/beat_line_holder.tscn" id="1_jj1vp"]
 [ext_resource type="Script" path="res://scripts/beatButton.gd" id="2_kn7kv"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_rdkm1"]
 
 [node name="World" type="Control"]
 layout_mode = 3
@@ -20,6 +22,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.105882, 0.435294, 0.435294, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="ColorRect/CenterContainer"]
+layout_mode = 2
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="ColorRect/CenterContainer/Control"]
+mesh = SubResource("SphereMesh_rdkm1")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
@@ -56,7 +72,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 focus_mode = 0
 theme_override_font_sizes/font_size = 30
-text = "Show Previous Attempt"
+text = "Show Attempt"
 script = ExtResource("1_hs46h")
 
 [node name="beatLineHolder" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jj1vp")]
@@ -66,18 +82,13 @@ artist = "Mariana"
 songPath = "res://songs/MARINA - Oh No! (I Feel Like I'm The Worst So I Always Act like I'm The Best) [Official Music Video].mp3"
 secondsOfSong = 15.0
 delaySeconds = -2.0
-bpm = 0.0
-bpmDelaySeconds = 0.0
+bpm = 127.0
 
 [node name="beatLineHolder2" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jj1vp")]
 layout_mode = 2
 songName = "Killing In the Name"
 artist = "Rage aginst the Machine"
 songPath = "res://songs/Rage Against The Machine - Killing In the Name (Official HD Video).mp3"
-secondsOfSong = 10.0
-delaySeconds = 0.1
-bpm = 0.0
-bpmDelaySeconds = 0.0
 
 [node name="beatButton" type="Button" parent="."]
 layout_mode = 1

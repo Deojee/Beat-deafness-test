@@ -1,5 +1,7 @@
-CheckButton
 Control
+CenterContainer
+MeshInstance2D
+CheckButton
 Button
 VSeparator
 ColorRect
@@ -10,4 +12,3 @@ CanvasModulate
 Node2D
 MarginContainer
 HBoxContainer
-ScrollContainer

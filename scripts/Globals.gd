@@ -4,4 +4,4 @@ var justPressed = false
 
 var beatButtonVisible = false
 
-var showPreviousAttempt = false
+var showAttempt = false

@@ -9,7 +9,7 @@ extends VBoxContainer
 @export var secondsOfSong : float = 10
 @export var delaySeconds : float = 0.1
 
-@export var bpm : float = 0.0
+@export var bpm : float = 200
 @export var bpmDelaySeconds : float = 0.0
 
 var beatLinePath : String  = "res://scenes/beat_timer_line.tscn"
@@ -26,6 +26,7 @@ func _ready():
 	if Engine.is_editor_hint():
 		return
 	
+	addControl()
 	addNewLine()
 	%AudioStreamPlayer.stream = load(songPath)
 	
@@ -39,6 +40,7 @@ func _process(delta):
 var playing = false
 
 var currentBeatLine : beatTimerLine = null
+var controlBeatLine : beatTimerLine = null
 func _on_play_button_pressed():
 	
 	if playing:
@@ -48,12 +50,28 @@ func _on_play_button_pressed():
 	start()
 	
 
+func addControl():
+	
+	var newLine = load(beatLinePath).instantiate() 
+	%beatLines.add_child(newLine)
+	newLine.control = null
+	controlBeatLine = newLine
+	controlBeatLine.holder = self
+	controlBeatLine.lengthInSeconds = secondsOfSong
+	
+	
+	
+	controlBeatLine.setControlBeats(bpm,bpmDelaySeconds)
+	
+	currentBeatLine = controlBeatLine
+	
+
 func addNewLine():
 	stop()
 	
 	var newLine = load(beatLinePath).instantiate() 
 	%beatLines.add_child(newLine)
-	newLine.previous = currentBeatLine
+	newLine.control = currentBeatLine
 	currentBeatLine = newLine
 	currentBeatLine.holder = self
 	currentBeatLine.lengthInSeconds = secondsOfSong

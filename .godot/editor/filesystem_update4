@@ -1,3 +1,7 @@
 res://scenes/beat_timer_line.tscn
 res://scenes/beat_line_holder.tscn
 res://scenes/world.tscn
+res://scripts/beat timer line.gd
+res://scripts/beatLineHolder.gd
+res://scripts/Globals.gd
+res://scenes/showPrevAttempt.gd
