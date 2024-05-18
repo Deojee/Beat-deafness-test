@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5o3ph6322ttg"]
+[gd_scene load_steps=4 format=3 uid="uid://c5o3ph6322ttg"]
 
+[ext_resource type="Script" path="res://scenes/showPrevAttempt.gd" id="1_hs46h"]
 [ext_resource type="PackedScene" uid="uid://cbb2r4h5s16ug" path="res://scenes/beat_line_holder.tscn" id="1_jj1vp"]
 [ext_resource type="Script" path="res://scripts/beatButton.gd" id="2_kn7kv"]
 
@@ -50,13 +51,23 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Hit space in time with the beat."
 
+[node name="showPrevAttempt" type="CheckButton" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 0
+theme_override_font_sizes/font_size = 30
+text = "Show Previous Attempt"
+script = ExtResource("1_hs46h")
+
 [node name="beatLineHolder" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jj1vp")]
 layout_mode = 2
 songName = "Oh No"
 artist = "Mariana"
 songPath = "res://songs/MARINA - Oh No! (I Feel Like I'm The Worst So I Always Act like I'm The Best) [Official Music Video].mp3"
-secondsOfSong = 5.0
+secondsOfSong = 15.0
 delaySeconds = -2.0
+bpm = null
+bpmDelaySeconds = null
 
 [node name="beatLineHolder2" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jj1vp")]
 layout_mode = 2
@@ -65,6 +76,8 @@ artist = "Rage aginst the Machine"
 songPath = "res://songs/Rage Against The Machine - Killing In the Name (Official HD Video).mp3"
 secondsOfSong = 10.0
 delaySeconds = 0.1
+bpm = null
+bpmDelaySeconds = null
 
 [node name="beatButton" type="Button" parent="."]
 layout_mode = 1
@@ -82,4 +95,5 @@ keep_pressed_outside = true
 text = "Beat"
 script = ExtResource("2_kn7kv")
 
+[connection signal="toggled" from="MarginContainer/ScrollContainer/VBoxContainer/showPrevAttempt" to="MarginContainer/ScrollContainer/VBoxContainer/showPrevAttempt" method="_on_toggled"]
 [connection signal="pressed" from="beatButton" to="beatButton" method="_on_pressed"]

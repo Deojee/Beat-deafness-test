@@ -9,6 +9,9 @@ extends VBoxContainer
 @export var secondsOfSong : float = 10
 @export var delaySeconds : float = 0.1
 
+@export var bpm : float = 0.0
+@export var bpmDelaySeconds : float = 0.0
+
 var beatLinePath : String  = "res://scenes/beat_timer_line.tscn"
 
 

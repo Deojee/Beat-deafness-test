@@ -12,3 +12,4 @@ res://scenes/beatButton.gd
 res://scripts/beatButton.gd
 res://scripts/Globals.gd
 res://scripts/Saves.gd
+res://scenes/showPrevAttempt.gd

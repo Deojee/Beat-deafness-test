@@ -53,6 +53,10 @@ func start(player : AudioStreamPlayer,delaySeconds : float):
 	visible = true
 	holder.visible = true
 	
+	if Globals.showPreviousAttempt and previous:
+		previous.visible = true
+	
+	
 	await get_tree().create_timer(delaySeconds).timeout
 	
 	running = true
