@@ -97,6 +97,7 @@ func updateLabel():
 		labelText += str(abs(numberOfBeatsDifference)) + " less beats. (" + str(beats.size()) + ")  | "
 	
 	var averageDifference : float = 0
+	var absoluteAverageDifference : float = 0
 	
 	var averagePositiveDifference : float = 0
 	var positiveDifferenceCount : float = 0
@@ -152,5 +153,10 @@ func getClosestDistance(num,sortedList):
 		
 		smallestDifference = difference
 		
+	
+	var newMarker = Label.new()
+	%labelLines.add_child(newMarker)
+	newMarker.position.x = (num/1000.0)/float(lengthInSeconds) * 1800 - 1.0
+	newMarker.text = str(smallestDifference)# + "\n" + str(num," ",newNum)
 	
 	return smallestDifference
