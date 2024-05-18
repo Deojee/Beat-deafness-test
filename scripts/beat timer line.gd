@@ -28,6 +28,7 @@ func _physics_process(delta):
 		return
 	
 	if Input.is_action_just_pressed("space") or Globals.justPressed:
+		Globals.beatReact.react()
 		Globals.justPressed = false
 		var newMarker = ColorRect.new()
 		%beatLines.add_child(newMarker)
@@ -175,7 +176,7 @@ func getClosestDistance(num,sortedList):
 			var newMarker = Label.new()
 			%labelLines.add_child(newMarker)
 			newMarker.position.x = (num/1000.0)/float(lengthInSeconds) * 1800 - 1.0
-			newMarker.text = str(smallestDifference)# + "\n" + str(num," ",newNum)
+			newMarker.text = str(int(smallestDifference))# + "\n" + str(num," ",newNum)
 			
 			return smallestDifference
 		
@@ -185,6 +186,6 @@ func getClosestDistance(num,sortedList):
 	var newMarker = Label.new()
 	%labelLines.add_child(newMarker)
 	newMarker.position.x = (num/1000.0)/float(lengthInSeconds) * 1800 - 1.0
-	newMarker.text = str(smallestDifference)# + "\n" + str(num," ",newNum)
+	newMarker.text = str(int(smallestDifference))# + "\n" + str(num," ",newNum)
 	
 	return smallestDifference

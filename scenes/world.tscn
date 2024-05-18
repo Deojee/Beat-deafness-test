@@ -1,10 +1,73 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5o3ph6322ttg"]
+[gd_scene load_steps=9 format=3 uid="uid://c5o3ph6322ttg"]
 
 [ext_resource type="Script" path="res://scenes/showPrevAttempt.gd" id="1_hs46h"]
 [ext_resource type="PackedScene" uid="uid://cbb2r4h5s16ug" path="res://scenes/beat_line_holder.tscn" id="1_jj1vp"]
+[ext_resource type="Script" path="res://scenes/BeatReact.gd" id="1_uihgy"]
 [ext_resource type="Script" path="res://scripts/beatButton.gd" id="2_kn7kv"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_rdkm1"]
+
+[sub_resource type="Animation" id="Animation_p03jn"]
+resource_name = "react"
+length = 0.3
+step = 0.0001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/CenterContainer/BeatReact/MeshInstance2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(4000, 4000)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect/CenterContainer/BeatReact/MeshInstance2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1713, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_astn1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/CenterContainer/BeatReact/MeshInstance2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect/CenterContainer/BeatReact/MeshInstance2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jqyhs"]
+_data = {
+"RESET": SubResource("Animation_astn1"),
+"react": SubResource("Animation_p03jn")
+}
 
 [node name="World" type="Control"]
 layout_mode = 3
@@ -31,11 +94,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="ColorRect/CenterContainer"]
+[node name="BeatReact" type="Control" parent="ColorRect/CenterContainer"]
 layout_mode = 2
+script = ExtResource("1_uihgy")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="ColorRect/CenterContainer/Control"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="ColorRect/CenterContainer/BeatReact"]
+modulate = Color(0.235294, 0.627451, 0.8, 1)
+scale = Vector2(1e-05, 1e-05)
 mesh = SubResource("SphereMesh_rdkm1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect/CenterContainer/BeatReact"]
+root_node = NodePath("../../../..")
+libraries = {
+"": SubResource("AnimationLibrary_jqyhs")
+}
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
@@ -83,6 +155,7 @@ songPath = "res://songs/MARINA - Oh No! (I Feel Like I'm The Worst So I Always A
 secondsOfSong = 15.0
 delaySeconds = -2.0
 bpm = 127.0
+bpmDelaySeconds = 0.5
 
 [node name="beatLineHolder2" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jj1vp")]
 layout_mode = 2

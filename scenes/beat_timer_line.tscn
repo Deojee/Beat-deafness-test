@@ -5,7 +5,7 @@
 [sub_resource type="Theme" id="Theme_do3ye"]
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 2
-Label/font_sizes/font_size = 32
+Label/font_sizes/font_size = 16
 
 [node name="beatLine" type="Control" groups=["beatLines"]]
 custom_minimum_size = Vector2(0, 100)
@@ -25,6 +25,7 @@ offset_bottom = 40.0
 
 [node name="marker" type="ColorRect" parent="beat timer line"]
 unique_name_in_owner = true
+offset_top = -62.0
 offset_right = 4.0
 offset_bottom = 40.0
 color = Color(0, 0, 0, 1)

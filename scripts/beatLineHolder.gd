@@ -71,7 +71,7 @@ func addNewLine():
 	
 	var newLine = load(beatLinePath).instantiate() 
 	%beatLines.add_child(newLine)
-	newLine.control = currentBeatLine
+	newLine.control = controlBeatLine
 	currentBeatLine = newLine
 	currentBeatLine.holder = self
 	currentBeatLine.lengthInSeconds = secondsOfSong

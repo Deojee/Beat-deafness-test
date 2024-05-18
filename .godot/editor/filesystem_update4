@@ -5,3 +5,4 @@ res://scripts/beat timer line.gd
 res://scripts/beatLineHolder.gd
 res://scripts/Globals.gd
 res://scenes/showPrevAttempt.gd
+res://scenes/BeatReact.gd
