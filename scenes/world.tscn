@@ -55,8 +55,8 @@ layout_mode = 2
 songName = "Oh No"
 artist = "Mariana"
 songPath = "res://songs/MARINA - Oh No! (I Feel Like I'm The Worst So I Always Act like I'm The Best) [Official Music Video].mp3"
-secondsOfSong = 20.0
-delaySeconds = 0.0
+secondsOfSong = 5.0
+delaySeconds = -2.0
 
 [node name="beatLineHolder2" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jj1vp")]
 layout_mode = 2

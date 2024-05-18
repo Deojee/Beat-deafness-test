@@ -57,7 +57,7 @@ func start(player : AudioStreamPlayer,delaySeconds : float):
 	
 	running = true
 	startTime = Time.get_ticks_msec()
-	player.play()
+	player.play(max(-delaySeconds,0))
 
 func cancel():
 	
@@ -92,21 +92,42 @@ func updateLabel():
 	if numberOfBeatsDifference == 0:
 		labelText += "Same number of beats.  | "
 	elif  numberOfBeatsDifference < 0:
-		labelText += str(abs(numberOfBeatsDifference)) + " more beats.  | "
+		labelText += str(abs(numberOfBeatsDifference)) + " more beats. (" + str(beats.size()) + ")  | "
 	else:
-		labelText += str(abs(numberOfBeatsDifference)) + " less beats.  | "
+		labelText += str(abs(numberOfBeatsDifference)) + " less beats. (" + str(beats.size()) + ")  | "
 	
 	var averageDifference : float = 0
+	
+	var averagePositiveDifference : float = 0
+	var positiveDifferenceCount : float = 0
+	
+	var averageNegativeDifference : float = 0
+	var negativeDistanceCount : float = 0
+	
 	var totalDifference : float = 0
 	
 	for beat in beats:
 		var difference = getClosestDistance(beat,previousBeats)
 		averageDifference += difference
 		totalDifference += abs(difference)
-	averageDifference /= float(beats.size())
+		
+		if difference >= 0:
+			positiveDifferenceCount += 1
+			averagePositiveDifference += difference
+		else:
+			negativeDistanceCount += 1
+			averageNegativeDifference += difference
+		
 	
-	labelText += " Average difference (MS) " + str(int(averageDifference))
-	labelText += " Total difference (MS) " + str(totalDifference)
+	averageDifference /= float(beats.size())
+	averageNegativeDifference /= negativeDistanceCount
+	averagePositiveDifference /= positiveDifferenceCount
+	
+	labelText += " Average difference (MS) " + str(int(averageDifference)) 
+	labelText += " POS: " + str(int(averagePositiveDifference)) +  " * " + str(int(positiveDifferenceCount))
+	labelText += " NEG: " + str(int(averageNegativeDifference)) +  " * " + str(int(negativeDistanceCount))
+	
+	labelText += " | Total difference (MS) " + str(totalDifference)
 	
 	%Label.text = labelText
 	
@@ -120,11 +141,16 @@ func getClosestDistance(num,sortedList):
 		
 		var difference = num - newNum
 		
-		if abs(difference) > smallestDifference:
+		if abs(difference) > abs(smallestDifference):
+			
+			var newMarker = Label.new()
+			%labelLines.add_child(newMarker)
+			newMarker.position.x = (num/1000.0)/float(lengthInSeconds) * 1800 - 1.0
+			newMarker.text = str(smallestDifference)# + "\n" + str(num," ",newNum)
+			
 			return smallestDifference
 		
-		smallestDifference = abs(difference)
-		
+		smallestDifference = difference
 		
 	
 	return smallestDifference

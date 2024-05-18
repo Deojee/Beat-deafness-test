@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgcgueon0iw1j"]
+[gd_scene load_steps=3 format=3 uid="uid://bgcgueon0iw1j"]
 
 [ext_resource type="Script" path="res://scripts/beat timer line.gd" id="1_v4qah"]
+
+[sub_resource type="Theme" id="Theme_do3ye"]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 2
+Label/font_sizes/font_size = 32
 
 [node name="beatLine" type="Control" groups=["beatLines"]]
 custom_minimum_size = Vector2(0, 100)
@@ -26,6 +31,15 @@ color = Color(0, 0, 0, 1)
 
 [node name="beatLines" type="Node2D" parent="beat timer line"]
 unique_name_in_owner = true
+
+[node name="labelLines" type="Control" parent="beat timer line"]
+unique_name_in_owner = true
+z_index = 2
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_do3ye")
 
 [node name="Label" type="Label" parent="beat timer line"]
 unique_name_in_owner = true
