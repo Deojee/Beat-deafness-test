@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgcgueon0iw1j"]
+
+[ext_resource type="Script" path="res://beat timer line.gd" id="1_hlq4s"]
+
+[node name="beatLine" type="Control" groups=["beatLines"]]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_hlq4s")
+lengthInSeconds = 10
+
+[node name="beat timer line" type="Node2D" parent="."]
+position = Vector2(0, 55)
+
+[node name="background" type="ColorRect" parent="beat timer line"]
+offset_right = 1800.0
+offset_bottom = 40.0
+
+[node name="marker" type="ColorRect" parent="beat timer line"]
+unique_name_in_owner = true
+offset_right = 4.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="beatLines" type="Node2D" parent="beat timer line"]
+unique_name_in_owner = true
+
+[node name="Label" type="Label" parent="beat timer line"]
+unique_name_in_owner = true
+offset_top = -50.0
+offset_right = 1799.0
+theme_override_font_sizes/font_size = 30
+text = "Unplayed
+"

@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgcgueon0iw1j"]
+
+[ext_resource type="Script" path="res://beat timer line.gd" id="1_hlq4s"]
+
+[node name="beatLine" type="Control"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="beat timer line" type="Node2D" parent="."]
+script = ExtResource("1_hlq4s")
+lengthInSeconds = 20
+
+[node name="background" type="ColorRect" parent="beat timer line"]
+offset_right = 1800.0
+offset_bottom = 40.0
+
+[node name="marker" type="ColorRect" parent="beat timer line"]
+unique_name_in_owner = true
+offset_right = 4.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="beatLines" type="Node2D" parent="."]
+unique_name_in_owner = true
