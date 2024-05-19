@@ -4,7 +4,7 @@ class_name beatTimerLine
 
 @export var lengthInSeconds = 60 * 3 + 45
 
-var safeTime
+var safeTimeSeconds
 
 #beats is an array of the number of miliseconds in that the beat is.
 var beats : Array = []
@@ -212,7 +212,7 @@ func updateLabel():
 		newMarker.position.x = ((beat + int(averageDifference)) /1000.0)/float(lengthInSeconds) * 1800 - 1.0
 		newMarker.position.y = -10
 		newMarker.size = Vector2(4,20)
-		newMarker.color = Color.AQUA
+		newMarker.color = Color.AQUA if beat > safeTimeSeconds * 1000 else Color.SLATE_GRAY
 		
 	
 	labelText = ""
@@ -258,7 +258,7 @@ func updateLabel():
 	
 	%Label.text = labelText
 	
-	
+	var missedBeats = countMissedBeats(adjustedBeats,controlBeats)
 	
 
 #assumes sorted list is from least to greatest, and not empty
@@ -272,21 +272,31 @@ func getClosestDistance(num,sortedList):
 		
 		if abs(difference) > abs(smallestDifference):
 			
-			#var newMarker = Label.new()
-			#%labelLines.add_child(newMarker)
-			#newMarker.position.x = (num/1000.0)/float(lengthInSeconds) * 1800 - 1.0
-			#newMarker.text = str(int(smallestDifference))# + "\n" + str(num," ",newNum)
-			
 			break
 		
 		smallestDifference = difference
 		
 	
-	#var newMarker = Label.new()
-	#%labelLines.add_child(newMarker)
-	#newMarker.position.x = (num/1000.0)/float(lengthInSeconds) * 1800 - 1.0
-	#newMarker.text = str(int(smallestDifference))# + "\n" + str(num," ",newNum)
-	
-	
 	
 	return smallestDifference
+
+func countMissedBeats(beats,_controlBeats):
+	
+	var controlBeats = []
+	for beat in _controlBeats:
+		if beat > safeTimeSeconds * 1000:
+			controlBeats.append(beat)
+	
+	controlBeats.pop_back()
+	controlBeats.pop_back()
+	
+	
+	var missedBeats = 0
+	for beat in controlBeats:
+		var difference = getClosestDistance(beat,beats)
+		if difference > milisecondsPerBeat/2.0:
+			missedBeats += 1
+		
+	
+	
+	pass
