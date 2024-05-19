@@ -1,21 +1,22 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1716049046
-export_presets.cfg::TextFile::-1::1715994610::0::1::::<><>::
-icon.svg::CompressedTexture2D::2764529332255310265::1715982186::1715982193::1::::<><>::
-::res://saves/::1715995213
-placeHolder.txt::TextFile::-1::1715995213::0::1::::<><>::
-::res://scenes/::1716046482
-BeatReact.gd::GDScript::-1::1716044940::0::1::::<>Control<>::
-beat_line_holder.tscn::PackedScene::4846765841458332314::1716046397::0::1::::<><>::res://scripts/beatLineHolder.gd
-beat_timer_line.tscn::PackedScene::2812082751209183685::1716046482::0::1::::<><>::res://scripts/beat timer line.gd
-showPrevAttempt.gd::GDScript::-1::1716044266::0::1::::<>CheckButton<>::
-world.tscn::PackedScene::6909135244651789600::1716046397::0::1::::<><>::res://scenes/showPrevAttempt.gd<>uid://cbb2r4h5s16ug::::res://scenes/beat_line_holder.tscn<>res://scenes/BeatReact.gd<>res://scripts/beatButton.gd
-::res://scripts/::1716047533
-beat timer line.gd::GDScript::-1::1716047533::0::1::::beatTimerLine<>Control<>::
-beatButton.gd::GDScript::-1::1715994539::0::1::::<>Button<>::
-beatLineHolder.gd::GDScript::-1::1716045019::0::1::::<>VBoxContainer<>::
-Globals.gd::GDScript::-1::1716044940::0::1::::<>Node<>::
-Saves.gd::GDScript::-1::1715995672::0::1::::<>Node<>::
-::res://songs/::1715992459
-MARINA - Oh No! (I Feel Like I'm The Worst So I Always Act like I'm The Best) [Official Music Video].mp3::AudioStreamMP3::807427175973239655::1715990959::1715990961::1::::<><>::
-Rage Against The Machine - Killing In the Name (Official HD Video).mp3::AudioStreamMP3::6015101847646160693::1715992459::1715992459::1::::<><>::
+::res://::1716076929
+export_presets.cfg::TextFile::-1::1716076654::0::1::::<><>::
+icon.svg::CompressedTexture2D::2764529332255310265::1716076654::1716076654::1::::<><>::
+::res://saves/::1716076654
+placeHolder.txt::TextFile::-1::1716076654::0::1::::<><>::
+::res://scenes/::1716076654
+BeatReact.gd::GDScript::-1::1716076654::0::1::::<>Control<>::
+beat_line_holder.tscn::PackedScene::4846765841458332314::1716076654::0::1::::<><>::res://scripts/beatLineHolder.gd
+beat_timer_line.tscn::PackedScene::2812082751209183685::1716076654::0::1::::<><>::res://scripts/beat timer line.gd
+showPrevAttempt.gd::GDScript::-1::1716076654::0::1::::<>CheckButton<>::
+volume.gd::GDScript::-1::1716076654::0::1::::<>HSlider<>::
+world.tscn::PackedScene::6909135244651789600::1716076654::0::1::::<><>::res://scenes/showPrevAttempt.gd<>uid://cbb2r4h5s16ug::::res://scenes/beat_line_holder.tscn<>res://scenes/BeatReact.gd<>res://scripts/beatButton.gd<>res://scenes/volume.gd
+::res://scripts/::1716076654
+beat timer line.gd::GDScript::-1::1716076654::0::1::::beatTimerLine<>Control<>::
+beatButton.gd::GDScript::-1::1716076654::0::1::::<>Button<>::
+beatLineHolder.gd::GDScript::-1::1716076654::0::1::::<>VBoxContainer<>::
+Globals.gd::GDScript::-1::1716076654::0::1::::<>Node<>::
+Saves.gd::GDScript::-1::1716076654::0::1::::<>Node<>::
+::res://songs/::1716076654
+MARINA - Oh No! (I Feel Like I'm The Worst So I Always Act like I'm The Best) [Official Music Video].mp3::AudioStreamMP3::807427175973239655::1716076654::1716076654::1::::<><>::
+Rage Against The Machine - Killing In the Name (Official HD Video).mp3::AudioStreamMP3::6015101847646160693::1716076654::1716076654::1::::<><>::
