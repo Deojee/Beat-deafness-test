@@ -4,7 +4,7 @@ class_name beatTimerLine
 
 @export var lengthInSeconds = 60 * 3 + 45
 
-
+var safeTime
 
 #beats is an array of the number of miliseconds in that the beat is.
 var beats : Array = []

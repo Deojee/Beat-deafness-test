@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5o3ph6322ttg"]
+[gd_scene load_steps=11 format=3 uid="uid://c5o3ph6322ttg"]
 
+[ext_resource type="Script" path="res://scenes/bearingsAndGo.gd" id="1_4u0rg"]
 [ext_resource type="Script" path="res://scenes/showPrevAttempt.gd" id="1_hs46h"]
 [ext_resource type="PackedScene" uid="uid://cbb2r4h5s16ug" path="res://scenes/beat_line_holder.tscn" id="1_jj1vp"]
 [ext_resource type="Script" path="res://scenes/BeatReact.gd" id="1_uihgy"]
@@ -13,7 +14,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect/CenterContainer/BeatReact/MeshInstance2D:scale")
+tracks/0/path = NodePath("bearingsAndGo/CenterContainer/BeatReact/MeshInstance2D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -25,7 +26,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect/CenterContainer/BeatReact/MeshInstance2D:self_modulate")
+tracks/1/path = NodePath("bearingsAndGo/CenterContainer/BeatReact/MeshInstance2D:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -42,7 +43,7 @@ step = 0.0001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect/CenterContainer/BeatReact/MeshInstance2D:scale")
+tracks/0/path = NodePath("bearingsAndGo/CenterContainer/BeatReact/MeshInstance2D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -54,7 +55,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect/CenterContainer/BeatReact/MeshInstance2D:self_modulate")
+tracks/1/path = NodePath("bearingsAndGo/CenterContainer/BeatReact/MeshInstance2D:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -78,7 +79,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="bearingsAndGo" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -86,8 +87,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.105882, 0.435294, 0.435294, 1)
+script = ExtResource("1_4u0rg")
 
-[node name="CenterContainer" type="CenterContainer" parent="ColorRect"]
+[node name="GetYourBearings" type="ColorRect" parent="bearingsAndGo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.854902, 0.27451, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="bearingsAndGo/GetYourBearings"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -95,16 +106,51 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BeatReact" type="Control" parent="ColorRect/CenterContainer"]
+[node name="Label" type="Label" parent="bearingsAndGo/GetYourBearings/CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "Get your bearings!"
+
+[node name="Go!" type="ColorRect" parent="bearingsAndGo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.486275, 0.678431, 0.0470588, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="bearingsAndGo/Go!"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="bearingsAndGo/Go!/CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "GO!"
+
+[node name="CenterContainer" type="CenterContainer" parent="bearingsAndGo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BeatReact" type="Control" parent="bearingsAndGo/CenterContainer"]
 layout_mode = 2
 script = ExtResource("1_uihgy")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="ColorRect/CenterContainer/BeatReact"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="bearingsAndGo/CenterContainer/BeatReact"]
 modulate = Color(0.235294, 0.627451, 0.8, 1)
 scale = Vector2(1e-05, 1e-05)
 mesh = SubResource("SphereMesh_rdkm1")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect/CenterContainer/BeatReact"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="bearingsAndGo/CenterContainer/BeatReact"]
 root_node = NodePath("../../../..")
 libraries = {
 "": SubResource("AnimationLibrary_jqyhs")

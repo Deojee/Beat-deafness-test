@@ -9,6 +9,8 @@ extends VBoxContainer
 @export var secondsOfSong : float = 10
 @export var delaySeconds : float = 0.1
 
+@export var timeToGetBearings = 5
+
 @export var bpm : float = 200
 @export var bpmDelaySeconds : float = 0.0
 
