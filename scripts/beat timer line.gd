@@ -258,7 +258,44 @@ func updateLabel():
 	
 	%Label.text = labelText
 	
-	var missedBeats = countMissedBeats(adjustedBeats,controlBeats)
+	var cutControlBeats = []
+	for beat in controlBeats:
+		if beat > safeTimeSeconds * 1000:
+			cutControlBeats.append(beat)
+	cutControlBeats.pop_back()
+	cutControlBeats.pop_back()
+	
+	var numberOfBeats = countBeats(adjustedBeats,cutControlBeats)
+	var beatsPercent = float(numberOfBeats)/float(cutControlBeats.size()) * 100
+	beatsPercent = snapped(beatsPercent,0.1)
+	
+	var accuracyPercent = 100.0 - snapped(
+				float(absoluteAverageDifference)/
+				((float(milisecondsPerBeat)/2.0)) * 100
+				,0.1)
+	
+	
+	%Accuracy.text = ("Accuracy\n" + 
+	str(accuracyPercent)+ "%\n"
+	+ str(snapped(absoluteAverageDifference,0.1)) + " ms"
+	)
+	
+	%Beats.text = (
+	"Beats\n" + 
+	str(beatsPercent) + "%\n"
+	+ str(numberOfBeats) + "/" + str(cutControlBeats.size())
+	)
+	
+	var score = 100.0
+	var letterGrade = "A"
+	score -= sqrt(100.0 - accuracyPercent)
+	score -= abs(beatsPercent - 100.0) 
+	
+	%Grade.text = (
+	"Beats\n" + 
+	str(beatsPercent) + "%\n"
+	+ str(numberOfBeats) + "/" + str(cutControlBeats.size())
+	)
 	
 
 #assumes sorted list is from least to greatest, and not empty
@@ -280,23 +317,12 @@ func getClosestDistance(num,sortedList):
 	
 	return smallestDifference
 
-func countMissedBeats(beats,_controlBeats):
+func countBeats(beats,controlBeats):
 	
-	var controlBeats = []
-	for beat in _controlBeats:
-		if beat > safeTimeSeconds * 1000:
-			controlBeats.append(beat)
-	
-	controlBeats.pop_back()
-	controlBeats.pop_back()
-	
-	
-	var missedBeats = 0
+	var hitBeats = 0
 	for beat in controlBeats:
 		var difference = getClosestDistance(beat,beats)
-		if difference > milisecondsPerBeat/2.0:
-			missedBeats += 1
-		
+		if difference < milisecondsPerBeat/2.0:
+			hitBeats += 1
 	
-	
-	pass
+	return hitBeats

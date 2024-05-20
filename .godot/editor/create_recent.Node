@@ -1,3 +1,8 @@
+RichTextLabel
+ScrollContainer
+VSeparator
+Container
+HBoxContainer
 Label
 CenterContainer
 ColorRect
@@ -5,10 +10,6 @@ MarginContainer
 VBoxContainer
 Panel
 HSlider
-HBoxContainer
 AnimationPlayer
 Control
 MeshInstance2D
-CheckButton
-Button
-VSeparator
