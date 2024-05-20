@@ -336,7 +336,7 @@ func countBeats(beats,controlBeats):
 	
 	var hitBeats = 0
 	for beat in controlBeats:
-		var difference = getClosestDistance(beat,beats)
+		var difference = getClosestDistance(beat,controlBeats)
 		if difference < milisecondsPerBeat/2.0:
 			hitBeats += 1
 	

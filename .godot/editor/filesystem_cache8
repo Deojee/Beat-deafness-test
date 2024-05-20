@@ -4,20 +4,21 @@ export_presets.cfg::TextFile::-1::1716076654::0::1::::<><>::
 icon.svg::CompressedTexture2D::2764529332255310265::1716076654::1716076654::1::::<><>::
 ::res://saves/::1716076654
 placeHolder.txt::TextFile::-1::1716076654::0::1::::<><>::
-::res://scenes/::1716146172
+::res://scenes/::1716223148
 bearingsAndGo.gd::GDScript::-1::1716129220::0::1::::<>ColorRect<>::
 BeatReact.gd::GDScript::-1::1716076654::0::1::::<>Control<>::
-beat_line_holder.tscn::PackedScene::4846765841458332314::1716146171::0::1::::<><>::res://scripts/beatLineHolder.gd
-beat_timer_line.tscn::PackedScene::2812082751209183685::1716146172::0::1::::<><>::res://scripts/beat timer line.gd
+beat_line_holder.tscn::PackedScene::4846765841458332314::1716223148::0::1::::<><>::res://scripts/beatLineHolder.gd
+beat_timer_line.tscn::PackedScene::2812082751209183685::1716223148::0::1::::<><>::res://scripts/beat timer line.gd
 showPrevAttempt.gd::GDScript::-1::1716076654::0::1::::<>CheckButton<>::
 volume.gd::GDScript::-1::1716076654::0::1::::<>HSlider<>::
-world.tscn::PackedScene::6909135244651789600::1716146171::0::1::::<><>::res://scenes/bearingsAndGo.gd<>res://scenes/showPrevAttempt.gd<>uid://cbb2r4h5s16ug::::res://scenes/beat_line_holder.tscn<>res://scenes/BeatReact.gd<>res://scripts/beatButton.gd<>res://scenes/volume.gd
-::res://scripts/::1716145958
-beat timer line.gd::GDScript::-1::1716080833::0::1::::beatTimerLine<>Control<>::
+world.tscn::PackedScene::6909135244651789600::1716223148::0::1::::<><>::res://scenes/bearingsAndGo.gd<>res://scenes/showPrevAttempt.gd<>uid://cbb2r4h5s16ug::::res://scenes/beat_line_holder.tscn<>res://scenes/BeatReact.gd<>res://scripts/beatButton.gd<>res://scenes/volume.gd
+::res://scripts/::1716222349
+beat timer line.gd::GDScript::-1::1716222349::0::1::::beatTimerLine<>Control<>::
 beatButton.gd::GDScript::-1::1716076654::0::1::::<>Button<>::
 beatLineHolder.gd::GDScript::-1::1716145958::0::1::::<>VBoxContainer<>::
 Globals.gd::GDScript::-1::1716080908::0::1::::<>Node<>::
 Saves.gd::GDScript::-1::1716076654::0::1::::<>Node<>::
-::res://songs/::1716076654
+::res://songs/::1716223826
+1-22 - Labyrinth Fight.mp3::AudioStreamMP3::5472280683593896792::1716223826::1716223826::1::::<><>::
 MARINA - Oh No! (I Feel Like I'm The Worst So I Always Act like I'm The Best) [Official Music Video].mp3::AudioStreamMP3::807427175973239655::1716076654::1716076654::1::::<><>::
 Rage Against The Machine - Killing In the Name (Official HD Video).mp3::AudioStreamMP3::6015101847646160693::1716076654::1716076654::1::::<><>::

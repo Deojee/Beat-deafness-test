@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cj72ws3it5h2g"
+path="res://.godot/imported/1-22 - Labyrinth Fight.mp3-56ca8b2ede717128a035ae9b8841d196.mp3str"
+
+[deps]
+
+source_file="res://songs/1-22 - Labyrinth Fight.mp3"
+dest_files=["res://.godot/imported/1-22 - Labyrinth Fight.mp3-56ca8b2ede717128a035ae9b8841d196.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
