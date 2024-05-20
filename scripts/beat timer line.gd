@@ -288,13 +288,28 @@ func updateLabel():
 	
 	var score = 100.0
 	var letterGrade = "A"
-	score -= sqrt(100.0 - accuracyPercent)
+	score -= (100.0 - accuracyPercent)/1.5
 	score -= abs(beatsPercent - 100.0) 
 	
+	score = snapped(score,0.1)
+	
+	if score > 90:
+		letterGrade = "A"
+	elif score > 80:
+		letterGrade = "B"
+	elif score > 70:
+		letterGrade = "C"
+	elif score > 60:
+		letterGrade = "D"
+	elif score > 50:
+		letterGrade = "F"
+	else:
+		letterGrade = "BAD"
+	
 	%Grade.text = (
-	"Beats\n" + 
-	str(beatsPercent) + "%\n"
-	+ str(numberOfBeats) + "/" + str(cutControlBeats.size())
+	"Grade\n" + 
+	str(score) + "%\n"
+	+ str(letterGrade)
 	)
 	
 
