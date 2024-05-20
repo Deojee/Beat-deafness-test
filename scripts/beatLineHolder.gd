@@ -9,7 +9,7 @@ extends VBoxContainer
 @export var secondsOfSong : float = 10
 @export var delaySeconds : float = 0.1
 
-@export var timeToGetBearings = 5
+@export var timeToGetBearings = 5.0
 
 @export var bpm : float = 200
 @export var bpmDelaySeconds : float = 0.0
@@ -51,6 +51,8 @@ func _on_play_button_pressed():
 	
 	start()
 	
+	Globals.bearings.display(timeToGetBearings-1.0)
+	
 
 func addControl():
 	
@@ -60,13 +62,13 @@ func addControl():
 	controlBeatLine = newLine
 	controlBeatLine.holder = self
 	controlBeatLine.lengthInSeconds = secondsOfSong
-	
+	controlBeatLine.safeTimeSeconds = timeToGetBearings
 	
 	
 	controlBeatLine.setControlBeats(bpm,bpmDelaySeconds)
 	
 	currentBeatLine = controlBeatLine
-	
+	currentBeatLine.milisecondsPerBeat = 60000/bpm
 
 func addNewLine():
 	stop()
@@ -77,7 +79,8 @@ func addNewLine():
 	currentBeatLine = newLine
 	currentBeatLine.holder = self
 	currentBeatLine.lengthInSeconds = secondsOfSong
-	
+	currentBeatLine.safeTimeSeconds = timeToGetBearings
+	currentBeatLine.milisecondsPerBeat = 60000/bpm
 
 func stop():
 	if currentBeatLine:
@@ -88,11 +91,14 @@ func stop():
 	
 	Globals.beatButtonVisible = false
 	
+	Globals.bearings.kill()
+	
 
 func start():
 	currentBeatLine.start(%AudioStreamPlayer,delaySeconds)
 	playing = true
 	%playButton.text = "Cancel"
 	
+	Globals.bearings.display(timeToGetBearings - 1.0)
 	Globals.beatButtonVisible = true
 	

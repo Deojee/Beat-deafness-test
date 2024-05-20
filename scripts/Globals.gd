@@ -8,6 +8,8 @@ var showAttempt = false
 
 var beatReact
 
+var bearings
+
 var autoInput = true
 var autoInputBPM = 127
 var lastAutoInput = 0

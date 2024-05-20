@@ -8,11 +8,11 @@ Label/constants/outline_size = 2
 Label/font_sizes/font_size = 16
 
 [node name="beatLine" type="Control" groups=["beatLines"]]
-custom_minimum_size = Vector2(0, 150)
+custom_minimum_size = Vector2(2.08165e-12, 270)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
-offset_bottom = 269.0
+offset_bottom = 150.0
 script = ExtResource("1_v4qah")
 lengthInSeconds = 10
 
